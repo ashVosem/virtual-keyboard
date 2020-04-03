@@ -1,47 +1,163 @@
-const KEYS_EN = ['`', '1', "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", 'Backspace',
-        'Tab', "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\", 'Delete',
-        'CapsLock', "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", 'Enter',
-        "Shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", '&uarr;', "Shift",
-        "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl","&larr;", "&darr;", "&rarr;"
-]
-const KEYS_EN_CAPS = ['~', '!', "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", 'Backspace',
-        'Tab', "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "|", 'Delete',
-        'CapsLock', "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", '"', 'Enter',
-        "Shift", "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?", '&uarr;', "Shift",
-        "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl","&larr;", "&darr;", "&rarr;"
-]
-const KEYS_RU = ['ё', '1', "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", 'Backspace',
-        'Tab', "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ", "\\", 'Delete',
-        'CapsLock', "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э", 'Enter',
-        "Shift", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ".", '&uarr;', "Shift",
-        "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl","&larr;", "&darr;", "&rarr;"
-]
-const KEYS_RU_CAPS = ['Ё', '!', '"', "№", ";", "%", ":", "?", "*", "(", ")", "_", "+", 'Backspace',
-        'Tab', "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ъ", "/", 'Delete',
-        'CapsLock', "Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э", 'Enter',
-        "Shift", "Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", ",", '&uarr;', "Shift",
-        "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl","&larr;", "&darr;", "&rarr;"
-]
+import {
+    KEY_CODE,
+    KEYS_EN,
+    KEYS_EN_CAPS,
+    KEYS_RU,
+    KEYS_RU_CAPS
+} from './keys.js';
 
-document.querySelector('body').innerHTML = `
-    <textarea class="textarea"></textarea>
-    <h1>shift+alt to change lang</h1>
-    <div class="keyboard">
-        <div class="keyboard__keys">
+class Keyboard {
+    constructor (KEYS) {
+        this.KEYS = KEYS;
+        this.isShift = false;
+        this.isCaps = false;
+    };
+    init() {
+        document.querySelector('body').innerHTML = `
+        <textarea class="textarea"></textarea>
+        <h1>shift+alt to change lang</h1>
+        <div class="keyboard">
+            <div class="keyboard__keys">
+            </div>
         </div>
-    </div>   
-`;
-
-function init() {
-    for(let i = 0; i < KEYS_RU.length; i++) {
-        if(i === 14 || i === 29 || i === 42 || i === 55) {
-            document.querySelector('.keyboard__keys').innerHTML += `<div class="clearfix"></div>`;
+        `;
+    };
+    lang_set(KEYS) {
+        for(let i = 0; i < KEYS.length; i++) {
+            if(i === 14 || i === 29 || i === 42 || i === 55) {
+                document.querySelector('.keyboard__keys').innerHTML += `<div class="clearfix"></div>`;
+            }
+            KEYS[i] === 'Backspace' || KEYS[i] === 'CapsLock' || KEYS[i] === 'Shift' || KEYS[i] === 'Enter'
+            ? document.querySelector('.keyboard__keys').innerHTML += `<div class="keyboard__key keyboard__key--wide" data="${KEY_CODE[i]}">${KEYS[i]}</div>`
+            : KEYS[i] === 'Space'
+            ? document.querySelector('.keyboard__keys').innerHTML += `<div class="keyboard__key keyboard__key--super-wide" data="${KEY_CODE[i]}">${KEYS[i]}</div>`
+            : document.querySelector('.keyboard__keys').innerHTML += `<div class="keyboard__key" data="${KEY_CODE[i]}">${KEYS[i]}</div>`;
         }
-        KEYS_RU[i] === 'Backspace' || KEYS_RU[i] === 'CapsLock' || KEYS_RU[i] === 'Shift' || KEYS_RU[i] === 'Enter' 
-        ? document.querySelector('.keyboard__keys').innerHTML += `<div class="keyboard__key keyboard__key--wide">${KEYS_RU[i]}</div>`
-        : KEYS_RU[i] === 'Space'
-        ? document.querySelector('.keyboard__keys').innerHTML += `<div class="keyboard__key keyboard__key--super-wide">${KEYS_RU[i]}</div>`
-        : document.querySelector('.keyboard__keys').innerHTML += `<div class="keyboard__key">${KEYS_RU[i]}</div>`;
+    };
+    lang_remove() {
+        document.querySelector('.keyboard__keys').innerHTML = '';
     }
 }
-init();
+window.onload = function() {
+    let KEYS = KEYS_RU;
+    
+    const keyboard = new Keyboard(KEYS);
+
+    let isCaps = false;
+    let isShift = false;
+
+    keyboard.init();
+    keyboard.lang_set(KEYS);
+
+
+    document.querySelectorAll('.keyboard__key').forEach(function(element) { 
+        element.onclick = function(event) {
+            document.querySelectorAll('.keyboard__key').forEach(function(element) { 
+                element.classList.remove('active');
+            });
+            if(this.getAttribute('data') === 'ShiftLeft') {
+                
+            }
+        }
+    });
+
+    document.onkeydown = function (event) {
+        document.querySelectorAll('.keyboard__key').forEach(element => {
+            if(element.code !== 'ShiftLeft') {
+                element.classList.remove('active');
+            }
+        });
+        document.querySelector(`.keyboard__key[data="${event.code}"]`).classList.add('active');
+
+        if(event.code === 'ShiftLeft') {
+            isShift = true;
+            keyboard.lang_remove();
+            switch(KEYS) {
+                case KEYS_RU:
+                    KEYS = KEYS_RU_CAPS;
+                    break;
+                case KEYS_RU_CAPS:
+                    KEYS = KEYS_RU;
+                    break;
+                case KEYS_EN:
+                    KEYS = KEYS_EN_CAPS;
+                    break;
+                case KEYS_EN_CAPS:
+                    KEYS = KEYS_EN;
+                    break;
+            }
+            keyboard.lang_set(KEYS);
+        }
+        if(event.code === 'AltLeft' && isShift) {
+            keyboard.lang_remove();
+            switch(KEYS) {
+                case KEYS_RU:
+                    KEYS = KEYS_EN;
+                    break;
+                case KEYS_RU_CAPS:
+                    KEYS = KEYS_EN_CAPS;
+                    break;
+                case KEYS_EN:
+                    KEYS = KEYS_RU;
+                    break;
+                case KEYS_EN_CAPS:
+                    KEYS = KEYS_RU_CAPS;
+                    break;
+            }
+            keyboard.lang_set(KEYS);
+        }
+        if(event.code === 'CapsLock') {
+            if(isCaps === true) {
+                isCaps = false;
+            }
+            else {
+                keyboard.lang_remove();
+                switch(KEYS) {
+                    case KEYS_RU:
+                        KEYS = KEYS_RU_CAPS;
+                        break;
+                    case KEYS_RU_CAPS:
+                        KEYS = KEYS_RU;
+                        break;
+                    case KEYS_EN:
+                        KEYS = KEYS_EN_CAPS;
+                        break;
+                    case KEYS_EN_CAPS:
+                        KEYS = KEYS_EN;
+                        break;
+                }
+                keyboard.lang_set(KEYS);
+                isCaps = false;
+            }
+        }
+    }
+    document.onkeyup = function (event) {
+        document.querySelectorAll('.keyboard__key').forEach(element => {
+            if(element !== document.querySelector(`.keyboard__key[data="CapsLock"]`)) {
+                element.classList.remove('active');
+            }
+            else if (isCaps === true) {
+                element.classList.remove('active');
+            }
+        });
+        if(event.code === 'ShiftLeft') {
+            keyboard.lang_remove();
+            switch(KEYS) {
+                case KEYS_RU:
+                    KEYS = KEYS_RU_CAPS;
+                    break;
+                case KEYS_RU_CAPS:
+                    KEYS = KEYS_RU;
+                    break;
+                case KEYS_EN:
+                    KEYS = KEYS_EN_CAPS;
+                    break;
+                case KEYS_EN_CAPS:
+                    KEYS = KEYS_EN;
+                    break;
+            }
+            keyboard.lang_set(KEYS);
+            isShift = false;
+        }
+    }
+}
