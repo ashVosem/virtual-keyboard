@@ -12,6 +12,8 @@ h1 {
     clear: both;
 }   
 .textarea {
+    resize: none;
+    outline: none;
     border-radius: 6px;
     position: absolute;
     max-width: 880px;
@@ -19,10 +21,18 @@ h1 {
     width: 75vw;
     height: 25vw;
 
+    padding: 10px;
+    font-size: 2rem;
+
     top: 10%;
     left: 49%;
 
     transform: translate(-50%);
+
+    background: url(../assets/rocket_background.jpg) no-repeat,rgba(255, 255, 255, 0.3);
+    background-size: 100% 100%;
+    background-blend-mode: color;
+   
 }
 .keyboard {
     position: fixed;
@@ -44,8 +54,8 @@ h1 {
 }
 .keyboard__key {
     position: relative;
-
-    height: 5vw;
+    font-size: 1.05rem;
+    height: 10vw;
     width: 5.56%;
     max-height: 60px;
     max-width: 60px;
@@ -57,7 +67,6 @@ h1 {
     background: rgba(255, 255, 255, 0.2);
     color: wheat;
 
-    font-size: 1.05rem;
     outline: none;
 
     cursor: pointer;
@@ -73,12 +82,13 @@ h1 {
 }
 .keyboard__key:hover{
     transition: ease-in 0.15s;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
 }
-.keyboard__key:active {
+/* .keyboard__key:active {
     background: rgba(255, 255, 255, 0.07);
-}
-.active {
+} */
+.active{
+    transform: scale(1.05);
     background: rgba(255, 255, 255, 0.07);
 }
 .keyboard__key--wide {
@@ -91,4 +101,8 @@ h1 {
 }
 .keydown {
     border-radius: 5px;
+}
+
+.disable {
+    display: none;
 }

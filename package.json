@@ -1,0 +1,33 @@
+{
+  "name": "virtual-keyboard",
+  "version": "1.0.0",
+  "description": "ash vosem project",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./src",
+    "fix": "eslint ./src --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashVosem/Virtual-Keyboard.git"
+  },
+  "keywords": [
+    "virtual",
+    "keyboard"
+  ],
+  "author": "ash.vosem@gmail.com",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/ashVosem/Virtual-Keyboard/issues"
+  },
+  "homepage": "https://github.com/ashVosem/Virtual-Keyboard#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-html": "^6.0.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^2.0.4"
+  }
+}
