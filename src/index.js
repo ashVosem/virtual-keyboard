@@ -396,6 +396,10 @@ class Keyboard {
   }
 }
 window.onload = function () {
+  if (!(JSON.parse(localStorage.getItem('isEng')))) {
+    localStorage.setItem('isEng', false);
+  }
+
   const keyboard = new Keyboard();
 
   keyboard.init();
