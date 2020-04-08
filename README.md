@@ -1,4 +1,5 @@
 # Virtual-Keyboard
+## КОММИТ ПОСЛЕ ДЕДЛАЙНА ЭТО ИСПРАВЛЕННАЯ ПОДСКАЗКА К ИЗМЕНЕНИЮ ЯЗЫКА
 * задание - https://github.com/rolling-scopes-school/tasks/blob/master/tasks/codejam-virtual-keyboard.md
 * демо - https://ashvosem.github.io/virtual-keyboard/src/
 * дата сдачи: 2020-07-04 / дата дедлайна: 2020-07-04
