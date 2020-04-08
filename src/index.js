@@ -15,7 +15,7 @@ class Keyboard {
     if (this.isEng === false) {
       document.querySelector('body').innerHTML = `
         <textarea class="textarea" readonly></textarea>
-        <h1>ctrl+alt to change lang</h1>
+        <h1>shift+ctrl to change lang</h1>
         <div class="keyboard">
             <div class="keyboard__keys current" data="RU">
             </div>
@@ -30,7 +30,7 @@ class Keyboard {
     } else if (this.isEng === true) {
       document.querySelector('body').innerHTML = `
         <textarea class="textarea" readonly></textarea>
-        <h1>ctrl+alt to change lang</h1>
+        <h1>shift+ctrl to change lang</h1>
         <div class="keyboard">
             <div class="keyboard__keys disable " data="RU">
             </div>
